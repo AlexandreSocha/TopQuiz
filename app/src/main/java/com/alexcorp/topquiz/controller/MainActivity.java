@@ -12,12 +12,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alexcorp.topquiz.R;
+import com.alexcorp.topquiz.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mGreetingTextView;
     private EditText mNameEditText;
     private Button mPlayButton;
+
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         mNameEditText = findViewById(R.id.main_edittext_name);
         mPlayButton = findViewById(R.id.main_button_play);
         mPlayButton.setEnabled(false);
+        mUser = new User();
+
         mNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -51,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 // The user just clicked
                 Intent gameActivityIntent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(gameActivityIntent);
+                mUser.setFirstName(mNameEditText.getText().toString());
             }
         });
 
